@@ -16,10 +16,49 @@ else()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-file(GLOB SOURCES "src/*.cpp")
-add_executable(Test ${SOURCES})
+############################################################
+# Create a library
+############################################################
 
-target_include_directories(Test
-    PRIVATE 
+#Generate the shared library from the library sources
+add_library(employee_lib SHARED
+    src/adjuster.cpp
+    src/developer.cpp
+    src/developer_cpp.cpp
+    src/economist.cpp
+    src/electronician.cpp
+    src/employee.cpp
+)
+add_library(employee::library ALIAS employee_lib)
+
+target_include_directories(employee_lib
+    PUBLIC 
         ${PROJECT_SOURCE_DIR}/include
 )
+
+add_library(staff_lib SHARED
+    src/staff.cpp
+)
+add_library(staff::library ALIAS staff_lib)
+
+target_include_directories(staff_lib
+    PUBLIC 
+        ${PROJECT_SOURCE_DIR}/include
+)
+
+############################################################
+# Create an executable
+############################################################
+
+# Add an executable with the above sources
+add_executable(Test
+    src/main.cpp
+)
+
+# link the new hello_library target with the hello_binary target
+target_link_libraries(Test
+    PRIVATE 
+        employee::library
+        staff::library
+)
+
