@@ -1,13 +1,6 @@
 #include <iostream>
 #include <list>
 
-#include "adjuster.h"
-#include "developer.h"
-#include "developer_cpp.h"
-#include "economist.h"
-#include "electronician.h"
-#include "employee.h"
-
 #include "staff.h"
 
 int main(int argc, char const *argv[]) {
@@ -39,8 +32,12 @@ int main(int argc, char const *argv[]) {
     }
 
     Staff::get_instance().set_list_employees(list_employees);
-    Staff::get_instance().print_full_info();
+    Staff::get_instance().print_info();
     Staff::get_instance().print_salary();
+
+    list_employees.push_back(Adjuster("a", "c", 3.5, "e"));
+    Staff::get_instance().set_list_employees(list_employees);
+    Staff::get_instance().print_list_staff_name(false);
 
     return 0;
 }
