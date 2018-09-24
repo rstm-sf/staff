@@ -13,16 +13,17 @@ else()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-if(MSVC)
-    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-    set(BUILD_SHARED_LIBS ON)
-endif()
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+set(BUILD_SHARED_LIBS ON)
+
+set(dir ${CMAKE_CURRENT_SOURCE_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${dir}/bin")
 
 ############################################################
 # Create a library
 ############################################################
 
-add_library(employee_lib SHARED
+add_library(Classes SHARED
     src/adjuster.cpp
     src/developer.cpp
     src/developer_cpp.cpp
@@ -30,24 +31,24 @@ add_library(employee_lib SHARED
     src/electronician.cpp
     src/employee.cpp
 )
-add_library(employee::library ALIAS employee_lib)
+add_library(employee::library ALIAS Classes)
 
-target_include_directories(employee_lib
+target_include_directories(Classes
     PUBLIC 
         ${PROJECT_SOURCE_DIR}/include
 )
 
-add_library(staff_lib SHARED
+add_library(Base SHARED
     src/staff.cpp
 )
-add_library(staff::library ALIAS staff_lib)
+add_library(staff::library ALIAS Base)
 
-target_include_directories(staff_lib
+target_include_directories(Base
     PUBLIC 
         ${PROJECT_SOURCE_DIR}/include
 )
 
-target_link_libraries(staff_lib
+target_link_libraries(Base
     PRIVATE
         employee::library
 )
@@ -61,7 +62,7 @@ add_executable(Test
 )
 
 target_link_libraries(Test
-    PRIVATE 
+    PRIVATE
         employee::library
         staff::library
 )

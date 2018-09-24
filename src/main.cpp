@@ -1,43 +1,40 @@
 #include <iostream>
 #include <list>
 
+#include <conio.h>
+
 #include "staff.h"
 
+std::list<Employee> generate_list_employees();
+
 int main(int argc, char const *argv[]) {
-    Adjuster a;
-    std::cout << a.get_first() << std::endl;
-
-    Adjuster b("a", "b", 5.5, "e");
-    std::cout << b.get_first() << std::endl;
-
-    b.print_full_info();
-
-    Developer_cpp c;
-    std::cout << c.get_first() << std::endl;
-
-    c.print_full_info();
-
-    Adjuster d(b);
-    d.print_full_info();
-
-    Developer_cpp e("a", "b", 5.5, "c", "d", "e", "f");
-    e.print_full_info();
-
-    std::list<Employee> list_employees;
-    list_employees.push_back(d);
-    list_employees.push_back(a);
-
-    for(auto & p : list_employees) {
-        p.print_full_info();
+    Staff::get_instance().set_list_employees(generate_list_employees());
+    while (true) {
+        char c = _getch();
+        int key = static_cast<int>(c);
+        if (65 <= key && key <= 90 || 97 <= key && key <= 122) {  // word key
+            Staff::get_instance().print_info();
+        } else if (48 <= key && key <= 57 ||
+                   96 <= key && key <= 105) { // number key
+            Staff::get_instance().print_salary();
+        } else if (key == 43 || key == 187 || key == 107) {  // key '+'
+            Staff::get_instance().print_list_staff_name();
+        } else if (key == 45 || key == 189 || key == 108) { // key '-'
+            Staff::get_instance().print_list_staff_name(false);
+        } else if (key == 27) { // key 'esc'
+            std::cout << "\nExit." << std::endl;
+            break;
+        }
     }
-
-    Staff::get_instance().set_list_employees(list_employees);
-    Staff::get_instance().print_info();
-    Staff::get_instance().print_salary();
-
-    list_employees.push_back(Adjuster("a", "c", 3.5, "e"));
-    Staff::get_instance().set_list_employees(list_employees);
-    Staff::get_instance().print_list_staff_name(false);
-
     return 0;
+}
+
+std::list<Employee> generate_list_employees() { 
+    Adjuster adjuster("d", "d", 4.0, "department");
+    Developer developer("e", "e", 5.0, "lang", "univer");
+    Developer_cpp dev_cpp("c", "c", 3.0, "univer", "1 day", "framework");
+    Economist economist("b", "b", 2.0, 10);
+    Electronician electr("a", "a", 1.0, std::list<std::uint8_t>{1});
+
+    return std::list<Employee>{adjuster, developer, dev_cpp, economist, electr};
 }

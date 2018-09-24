@@ -21,7 +21,7 @@ void Electronician::print_full_info() {
     std::cout << "================================================================================";
     std::cout << "\nName: " << first << " " << last << "\n";
     std::cout << "Post: " << post << "\n";
-    std::cout << "Salary: " << std::put_money(salary) << "\n";
+    std::cout << "Salary: " << salary << "\n";
     std::cout << "Department: " << department << "\n";
     std::cout << "Known number ohm's law: " << known_ohm_law.size() << "\n";
     std::cout << "================================================================================";
@@ -43,4 +43,10 @@ std::list<std::uint8_t> Electronician::get_known_ohm_law() const {
 void Electronician::set_known_ohm_law(
     const std::list<std::uint8_t> & known_ohm_law) {
     this->known_ohm_law = known_ohm_law;
+}
+
+const map_law Electronician::ohm_law{std::make_pair(1, "Number One")};
+
+std::string Electronician::get_ohm_law_description(std::int8_t number) {
+    return ohm_law.at(number);
 }

@@ -22,7 +22,7 @@ void Developer::print_full_info() {
     std::cout << "================================================================================";
     std::cout << "\nName: " << first << " " << last << "\n";
     std::cout << "Post: " << post << "\n";
-    std::cout << "Salary: " << std::put_money(salary) << "\n";
+    std::cout << "Salary: " << salary << "\n";
     std::cout << "Language: " << language << "\n";
     std::cout << "University: " << university << "\n";
     std::cout << "================================================================================";

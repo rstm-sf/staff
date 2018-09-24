@@ -22,7 +22,7 @@ void Staff::print_salary() {
         std::cout << std::put_money(p.get_salary()) << std::endl;
 }
 
-void Staff::print_list_staff_name(bool is_ascending = true) {
+void Staff::print_list_staff_name(bool is_ascending) {
     std::list<Name_Salary> order;
 
     for(const auto & p: list_employees)

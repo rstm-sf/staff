@@ -29,7 +29,7 @@ public:
 
     void print_info();
     void print_salary();
-    void print_list_staff_name(bool is_ascending);
+    void print_list_staff_name(bool is_ascending = true);
 
 private:
     Staff() = default;

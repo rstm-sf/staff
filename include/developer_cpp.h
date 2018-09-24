@@ -9,7 +9,6 @@ public:
         const std::string & first,
         const std::string & last,
         double salary,
-        const std::string & language,
         const std::string & university,
         const std::string & life,
         const std::string & framework);

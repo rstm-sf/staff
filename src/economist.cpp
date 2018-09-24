@@ -20,7 +20,7 @@ void Economist::print_full_info() {
     std::cout << "================================================================================";
     std::cout << "\nName: " << first << " " << last << "\n";
     std::cout << "Post: " << post << "\n";
-    std::cout << "Salary: " << std::put_money(salary) << "\n";
+    std::cout << "Salary: " << salary << "\n";
     std::cout << "Amount firm: " << amount_firm << "\n";
     std::cout << "================================================================================";
     std::cout << std::endl;

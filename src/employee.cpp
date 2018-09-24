@@ -32,7 +32,7 @@ void Employee::print_full_info() {
     std::cout << "================================================================================";
     std::cout << "\nName: " << first << " " << last << "\n";
     std::cout << "Post: " << post << "\n";
-    std::cout << "Salary: " << std::put_money(salary) << "\n";
+    std::cout << "Salary: " << salary << "\n";
     std::cout << "================================================================================";
     std::cout << std::endl;
 }

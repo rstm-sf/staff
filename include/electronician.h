@@ -31,6 +31,8 @@ public:
     std::list<std::uint8_t> get_known_ohm_law() const;
     void set_known_ohm_law(const std::list<std::uint8_t> & known_ohm_law);
 
+    static std::string get_ohm_law_description(std::int8_t number);
+
 private:
     static const map_law ohm_law;
 
